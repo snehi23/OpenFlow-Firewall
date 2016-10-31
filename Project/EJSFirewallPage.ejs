@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Firewall Rule Manager</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<style>
+		.button {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+		.linklike {
+			background:none!important;
+			border:none;
+			padding:0!important;
+			font: inherit;
+			/*border is optional*/
+			border-bottom:1px solid #444;
+			cursor: pointer;
+			color:#77B4F2;
+		}
+		body {
+			background:#303030;
+		}
+		h1 {
+			color: #ffffff;
+			font-family: 'Lato', sans-serif;
+			font-size: 51px;
+			font-weight: 300;
+			line-height: 50px;
+			margin: 0 0 20px;
+		}
+		h3 {
+			color: #000000;
+			font-family: 'Lato', sans-serif;
+		}
+		.bodyStyle {
+			color: #000000;
+			font-family: 'Lato', sans-serif;
+			width:auto;
+			display:inline;
+			word-wrap:break-word;
+		}
+		#demo {
+			color:#ffffff;
+		}
+
+		#dateTimeValue
+		{
+			background: #fe921f;
+			color: #ffffff;
+			display: inline-block;
+			font-family: 'Lato', sans-serif;
+			font-size: 12px;
+			font-weight: bold;
+			line-height: 12px;
+			letter-spacing: 1px;
+			margin: 0 0 30px;
+			padding: 10px 15px 8px;
+			text-transform: uppercase;
+		}?
+	</style>
+	<script>
+		function startTime() {
+			var today = new Date();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			if(dd<10){
+				dd='0'+dd
+			}
+			if(mm<10){
+				mm='0'+mm
+			}
+			m = checkTime(m);
+			s = checkTime(s);
+			document.getElementById('dateTimeValue').innerHTML =
+			"Current Date - " + mm + "/" + dd + "/" + yyyy + "    |    " + "Current Time - " + h + ":" + m + ":" + s;
+			var t = setTimeout(startTime, 500);
+		}
+		function checkTime(i) {
+			if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+			return i;
+		}
+	</script>
+	<body onload="startTime()">
+		<form name="Firewall Rule Manager" method="post">
+			<br><br><br>
+
+			<div class="mainContent">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<h1>Firewall Rule Management Interface</h1>
+					<div id="dateTimeValue"></div></h1>
+
+
+					<br>
+
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+								Rule 1: Get the flow entries</a>
+							</h4>
+							</div>
+							<div id="collapse1" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<div class="col-md-12">
+										<b>Get the flow entries:</b> This rule enables the network engineer to view the flow entries associated with a specific node
+										(or switch) and a specific table of that node, which were added by "enduser".
+										<br><br> To apply this rule, do the following:<br>
+									</div>
+									<div class="col-md-4">
+									Input 1: Enter Node ID.<br>
+									Input 2: Enter Table ID.<br>
+									Click on "apply RULE".<br><br>
+									</div>
+									<div class="col-md-8">
+									Input 1: <input type="text" name="input11" id="input11"/><br>
+									Input 2: <input type="text" name="input12" id="input12"/><br>
+									</div>
+									<div class="col-md-12">
+										<input type="submit" name="rule1" class="button" value="Apply RULE" formaction="/post_firewall_rule1"/>
+									</div>
+									<%= jsonData %>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+								Current Flow Entries</a>
+							</h4>
+							</div>
+							<div id="collapse3" class="panel-collapse collapse">
+								<div class="panel-body">
+									<div class="col-md-12">
+										<b>Current Flow Entries:</b> Flow entries based on your request in "RULE 1".
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+								Rule 2: Add Flow Entries</a>
+							</h4>
+							</div>
+							<div id="collapse2" class="panel-collapse collapse">
+								<div class="panel-body">
+									<div class="col-md-12">
+										<b>Add Flow Entries to drop packets:</b> This rule enables the network engineer to add new flow entries to existing nodes
+										so that a <i>drop</i> action can be performed based on the source, destination or both.
+										These new flow entries can be used to manipulate the way packets are handled in the network.
+										<br><br> To apply this rule, do the following:<br>
+									</div>
+									<div class="col-md-4">
+									Input 1: Enter Node ID.<br>
+									Input 2: Enter Table ID.<br>
+									Input 3: Enter Flow ID.<br>
+									Input 4: Enter Source IP.<br>
+									And / Or<br>
+									Input 5: Enter Destination IP.<br>
+								  Click on "apply RULE".<br><br>
+									</div>
+									<div class="col-md-8">
+									Input 1: <input type="text" name="input21" id="input21"/><br>
+									Input 2: <input type="text" name="input22" id="input22"/><br>
+									Input 3: <input type="text" name="input23" id="input23"/><br>
+									Input 4: <input type="text" name="input24" id="input24"/><br>
+									Input 5: <input type="text" name="input25" id="input25"/><br>
+									</div>
+									<div class="col-md-12">
+										<input type="submit" name="rule2" class="button" value="apply RULE" formaction="/post_firewall_rule2"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+						<button type="button" class="linklike pull-right" data-toggle="collapse" data-target="#demo">About the project</button>
+						<div id="demo" class="collapse pull-right">
+							<i>This project investigates firewall rule implementation on Software Defined Networks (SDN) using OpenFlow standards. 
+							The outcome of the project is a Virtual network connected via an Open vSwitch along with a Firewall Rule Management System. </i>
+						</div>
+
+				</div>
+				<div class="col-md-3"></div>
+
+			</div>
+		</form>
+	</body>
+</html>

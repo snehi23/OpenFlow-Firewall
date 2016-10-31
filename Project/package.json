@@ -1,0 +1,37 @@
+{
+  "name": "Firewall UI",
+  "version": "1.0.0",
+  "description": "Cloud Computing Project - OpenFlow based Firewall",
+  "contributors": [
+    {
+      "name": "Snehal Shendware",
+      "email": "snehal.shendware@asu.edu"
+    },
+    {
+      "name": "Manohara Rao Penumala",
+      "email": "mpenumal@asu.edu"
+    },
+     {
+      "name": "Kedar Pitke",
+      "email": "kpitke@asu.edu"
+    }
+  ],
+  "main": "/",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0"
+  },
+  "engines": {
+    "node": ">=4.0.0",
+    "npm": ">=3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manohara Rao Penumala"
+}
