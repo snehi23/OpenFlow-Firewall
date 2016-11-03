@@ -1,4 +1,4 @@
-# Firewall rule management system using OpenDaylight RestConf.
+# Firewall rule management system using OpenDaylight RestConf and POX
 
 Overview:
 
